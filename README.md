@@ -32,15 +32,15 @@
 
 ## 変数
 
-スクリプトの先頭に記載されています（環境にあわせて修正が必要）。
+mkvadd.json で設定します（環境にあわせて修正が必要）。
 
-mkvmergeを起動するバッチファイル（ファイルが作成できる場所であればどこでも可）
+mkvmergeを起動するバッチファイル名
 
-> batfilename = 'H:\\mp4mkvmerge_.bat'
+> batfilename = 'mp4mkvmerge_.bat'
 
-チャプターを作成するときの作業用ファイル（ファイルが作成できる場所であればどこでも可）
+チャプターを作成するときの作業用ファイル名
 
-> metafilename = 'H:\\metadata.txt'
+> metafilename = 'metadata.txt'
 
 mkvmerge.exe の場所
 
@@ -58,17 +58,17 @@ mkvextract.exe の場所
 
 > mkvextract = 'C:\\Program Files\\MKVToolNix\\mkvextract.exe'
 
-NVEncC64.exe の場所
+NVEncC64.exe / QSVEncC64.exe / VCEEncC64.exe の場所
 
 > nvenc = 'C:\\Program Files\\NVEnc_5.46\\NVEncC\\x64\\NVEncC64.exe'
 
-NVEncC64.exe コマンドライン
+NVEncC64.exe / QSVEncC64.exe / VCEEncC64.exe コマンドライン
 
 > nvenc_opt = '--qvbr 29 --preset default --bref-mode each --lookahead 32 -c hevc --level 6 --output-depth 10 -b 3 --avhw --avsync vfr --gop-len auto'
 
 作業用の空ディレクトリ（存在している必要あり）
 
-> tempDir = 'C:\\TEMP'
+> temp_dir = 'C:\\TEMP'
 
 作業用ファイル名
 
@@ -100,24 +100,24 @@ NVEncC64.exe コマンドライン
 
 ## 使い方
 
-> C:\> python mp4mkvmerge.py <結合するファイルがあるディレクトリ> <結合するファイル名の先頭部分> <結合したファイル名> <元ファイルの移動先> [chaprenew]
+> C:\> python mkvadd.py <結合するファイルがあるディレクトリ> <結合するファイル名の先頭部分> <結合したファイル名> <元ファイルの移動先> [chaprenew]
 
 ### サンプル
 
-> python mp4mkvmerge.py "C:\Videos" "DORAMA" "DORAMA #01-12 END" "C:\DELETE"
+> python mkvadd.py -e ### "C:\Videos" "DORAMA"
 
-- C:\Videos ディレクトリにある DORAMAで始まるファイル（DORAMA*.mp4, DORAMA*.mkv）を（ファイル名を pythonの標準sort順で）結合します。
+- C:\Videos ディレクトリにある DORAMAで始まるファイル（DORAMA #nn.mp4, DORAMA #nn.mkv）を（ファイル名を pythonの標準sort順で）結合します。
 - DORAMA #01.mp4 と DORAMA #01.mkv が存在する場合は同一とみなし DORAMA #01.mkv を結合対象とします。
+- #01から#12 の12ファイルが存在する場合
 - 処理が終わったら、C:\Videos\DORAMA #01-12 END.mkv ファイルが生成されます。
-- 結合前のファイルは、C:\DELETE フォルダに移動されます。
+- 結合前のファイルは、mkvadd.json の move_directory フォルダに移動されます。
 
-> python mp4mkvmerge.py "C:\Videos" "ANIME" "ANIME #01-13 END" "C:\DELETE" "chaprenew"
+> python mp4mkvmerge.py -e ymd "C:\Videos" "NEWS"
 
-- C:\Videos ディレクトリにある ANIMEで始まるファイル（ANIME*.mp4, ANIME*.mkv）を（ファイル名を pythonの標準sort順で）結合します。
-- ANIME #01.mp4 と ANIME #01.mkv が存在する場合は同一とみなし ANIME #01.mkv を結合対象とします。
-- 結合前の動画ファイルのチャプター情報を無視してファイル名をチャプター情報として再設定します。
-- 処理が終わったら、C:\Videos\ANIME #01-13 END.mkv ファイルが生成されます。
-- 結合前のファイルは、C:\DELETE フォルダに移動されます。
+- C:\Videos ディレクトリにある NEWS NEWS*.mp4, NEWS*.mkv）を（ファイル名を pythonの標準sort順で）結合します。
+- ファイル名に含まれている yyyymmdd もしくは ファイルのタイムスタンプ でソートして、マージします。
+- 処理が終わったら、C:\Videos\NEWS 20220101-20220131.mkv ファイルが生成されます。
+- 結合前のファイルは、mkvadd.json の move_directory フォルダに移動されます。
 
 ### 動作確認
 
