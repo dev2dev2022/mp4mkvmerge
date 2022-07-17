@@ -1,0 +1,44 @@
+{
+    "mkvmerge": "C:\\Program Files\\MKVToolNix\\mkvmerge.exe",
+    "ffmpeg": "C:\\Program Files\\ffmpeg\\bin\\ffmpeg.exe",
+    "ffprobe": "C:\\Program Files\\ffmpeg\\bin\\ffprobe.exe",
+    "nvenc": "C:\\DTV\\QSVEncC_7.03_x64\\QSVEncC64.exe",
+    
+    "mkvextract": "C:\\Program Files\\MKVToolNix\\mkvextract.exe",
+
+    "temp_dir": "D:\\_TEMP",
+    "temp_ctrldir": "D:\\_TEMPCtrl",
+
+    "batfilename": "mp4mkvmerge_.bat",
+    "metafilename": "metadata.txt",
+    "ffprobejson": "mp4mkvmerge_.json",
+    "mergefilename": "000.mkv",
+    "chkmp4filename": "chk.mp4",
+    "chkmkvfilename": "chk.mkv",
+    "chkchapterfilename": "chap.txt",
+    "tmpchapfilename": "tmp.mkv",
+
+    "codec_name_v": "hevc",
+    "codec_name_a": "aac",
+    "width": 1280,
+    "height": 720,
+    "sample_rate": "48000",
+
+    "reenc_codec_v": "hevc_nvenc",
+    "reenc_codec_a": "aac",
+    "reenc_bitrate": "1200k",
+
+    "nvenc_codec_v": "hevc",
+    "nvenc_codec_a": "aac",
+    "nvenc_opt": "--colorprim bt709 --transfer bt709 --colormatrix bt709 --avhw -c hevc --max-bitrate 1100 ",
+    "ffmpeg_flac2mp3_opt": "-i %s -ac 2 -ar 44100 -ab 192k -acodec libmp3lame -f mp3 -map_metadata 0 -id3v2_version 3 %s",
+    "nvenc_264to265_opt": "--qvbr 29 --preset default --bref-mode each --lookahead 32 -c hevc --level 6 --output-depth 10 -b 3 --avhw --avsync vfr --audio-copy -i %s -o %s",
+    "nvenc_1280_opt": "--qvbr 29 --preset default --bref-mode each --lookahead 32 -c hevc --level 6 --output-depth 10 -b 3 --avhw --avsync vfr --audio-copy --output-res 1280x-2 --gop-len auto -i %s -o %s",
+
+    "reencexec": "nvenc",
+
+    "move_directory": "D:\\_DEL",
+
+    "max_size": 16000000000,
+    "max_size_end": "$"
+}

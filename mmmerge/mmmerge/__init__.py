@@ -1,0 +1,1 @@
+from mmmerge.mmmerge import *
